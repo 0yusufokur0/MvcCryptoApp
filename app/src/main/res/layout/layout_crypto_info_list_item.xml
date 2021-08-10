@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_margin="5dp"
+        android:background="@drawable/shape_markets_view"
+        android:layout_gravity="center"
+        >
+
+
+
+        <TextView
+            android:id="@+id/tvCurrency"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Btc"
+            android:textSize="16dp"
+            android:fontFamily="sans-serif-medium"
+           android:layout_marginLeft="20dp"
+            android:textColor="@color/base_window_background"
+            android:layout_marginTop="5dp"
+            />
+
+
+            <TextView
+                android:id="@+id/tvPrice"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="35.000"
+                android:textSize="15dp"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/base_window_background"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+
+                />
+
+        <ImageView
+            android:layout_width="65dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/shape_login_activity_edit_text"
+            android:gravity="end"
+            android:layout_marginRight="10dp"
+
+            />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/item_favori"
+            android:gravity="end"
+            android:layout_marginRight="10dp"
+            />
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
