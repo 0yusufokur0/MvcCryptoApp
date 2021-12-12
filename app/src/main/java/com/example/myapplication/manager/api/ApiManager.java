@@ -24,13 +24,12 @@ public class ApiManager {
 
     private static ApiManager instance;
     private final int RETRY_COUNT = ProjectSettings.API_RETRY_COUNT;
-
-    private Context mContext;
-    private List<ApiListener> mApiListener;
-    private RequestQueue  mRequestQueue;
-    private Map<String,String> mHeaders;
-    private List<Object> mErrorCounter;
-    private Gson mGson;
+    private final Context mContext;
+    private final List<ApiListener> mApiListener;
+    private final RequestQueue mRequestQueue;
+    private final Map<String, String> mHeaders;
+    private final List<Object> mErrorCounter;
+    private final Gson mGson;
 
     public ApiManager(Context context) {
         mContext = context;
@@ -43,9 +42,9 @@ public class ApiManager {
         mHeaders.put("Content-Type", ContentType.APPLICATION_JSON.getTypeName());
     }
 
-    public static  ApiManager getInstance(Context context){
-        if(instance==null){
-            instance=new ApiManager(context);
+    public static ApiManager getInstance(Context context) {
+        if (instance == null) {
+            instance = new ApiManager(context);
         }
         return instance;
     }
@@ -76,12 +75,12 @@ public class ApiManager {
         });
     }
 
-    public void setAuthorizationToken(String token) {
-        addHeader(ProjectSettings.API_HEADER_AUTHORIZATION_TOKEN_KEY, token);
-    }
-
     public String getAuthorizationToken() {
         return mHeaders.get(ProjectSettings.API_HEADER_AUTHORIZATION_TOKEN_KEY);
+    }
+
+    public void setAuthorizationToken(String token) {
+        addHeader(ProjectSettings.API_HEADER_AUTHORIZATION_TOKEN_KEY, token);
     }
 
     public void addHeader(String key, String value) {
@@ -137,7 +136,7 @@ public class ApiManager {
         } else if (requestType == RequestType.BODY) {
             r = prepareBodyRequest(request);
         } else if (requestType == RequestType.MULTIPART) {
-           /* r = prepareMultipartRequest(request);*/
+            /* r = prepareMultipartRequest(request);*/
         } else if (requestType == RequestType.QUERY) {
             r = prepareQueryStringRequest(request);
         }

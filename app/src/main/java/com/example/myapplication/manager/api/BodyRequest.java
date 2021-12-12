@@ -20,13 +20,13 @@ import java.util.Map;
 
 public class BodyRequest<T> extends Request<T> {
 
-    private Gson mGson;
-    private ApiMethod mApiMethod;
-    private Class<T> mResponseClass;
+    private final Gson mGson;
+    private final ApiMethod mApiMethod;
+    private final Class<T> mResponseClass;
     private String mBody;
-    private Map<String, String> mHeaders;
-    private Response.Listener<T> mSuccessListener;
-    private SecurityHelper mSecurityHelper;
+    private final Map<String, String> mHeaders;
+    private final Response.Listener<T> mSuccessListener;
+    private final SecurityHelper mSecurityHelper;
 
     public BodyRequest(Context context, ApiMethod apiMethod, Object body, Map<String, String> headers, Response.Listener<T> successListener, Response.ErrorListener errorListener) {
         super(apiMethod.getMethodType(), apiMethod.getUrl(), errorListener);

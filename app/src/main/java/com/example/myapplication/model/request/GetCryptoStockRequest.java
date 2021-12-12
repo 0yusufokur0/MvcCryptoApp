@@ -1,9 +1,8 @@
 package com.example.myapplication.model.request;
 
-public class GetCryptoStockRequest extends BaseRequest{
+public class GetCryptoStockRequest extends BaseRequest {
 
-
-        private String key;
+    private String key;
 
     public String getKey() {
         return key;

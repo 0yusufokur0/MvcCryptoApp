@@ -44,7 +44,7 @@ public class GetInformatiomDialog extends BaseDialog implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        if(v==ibClose){
+        if (v == ibClose) {
             dismiss();
         }
     }
@@ -53,8 +53,6 @@ public class GetInformatiomDialog extends BaseDialog implements View.OnClickList
     public int getLayoutId() {
         return R.layout.layout_get_information;
     }
-
-
 
 
 }

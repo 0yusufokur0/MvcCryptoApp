@@ -6,7 +6,7 @@ import android.text.TextUtils;
 import com.example.myapplication.constant.ApiMethod;
 import com.example.myapplication.model.request.BaseRequest;
 
-public abstract class ApiResponse  extends ApiEntity{
+public abstract class ApiResponse extends ApiEntity {
     private ApiMethod mApiMethod;
     private ApiErrorType mApiErrorType;
     private BaseRequest mRequest;

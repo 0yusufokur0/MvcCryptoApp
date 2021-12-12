@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 
@@ -15,9 +14,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public  abstract class BaseTemplateActivity extends AppCompatActivity  {
-    public Context context=this;
-    public BaseTemplateActivity activity=this;
+public abstract class BaseTemplateActivity extends AppCompatActivity {
+    public Context context = this;
+    public BaseTemplateActivity activity = this;
 
     @BindView(android.R.id.content)
     ViewGroup vgContent;
@@ -28,34 +27,45 @@ public  abstract class BaseTemplateActivity extends AppCompatActivity  {
         return -1;
     }
 
-    public void createViews() {}
+    public void createViews() {
+    }
 
-    public void assignObjects() {}
+    public void assignObjects() {
+    }
 
-    public void setListeners() {}
+    public void setListeners() {
+    }
 
-    public void prepareUI() {}
-
-    @CallSuper
-    public void onLayoutReady() {}
-
-    @CallSuper
-    public void onCreated() {}
+    public void prepareUI() {
+    }
 
     @CallSuper
-    public void onStarted() {}
+    public void onLayoutReady() {
+    }
 
     @CallSuper
-    public void onResumed() {}
+    public void onCreated() {
+    }
 
     @CallSuper
-    public void onPaused() {}
+    public void onStarted() {
+    }
 
     @CallSuper
-    public void onStopped() {}
+    public void onResumed() {
+    }
 
     @CallSuper
-    public void onDestroyed() {}
+    public void onPaused() {
+    }
+
+    @CallSuper
+    public void onStopped() {
+    }
+
+    @CallSuper
+    public void onDestroyed() {
+    }
 
     @Override
     protected final void onCreate(@Nullable Bundle savedInstanceState) {
@@ -134,7 +144,7 @@ public  abstract class BaseTemplateActivity extends AppCompatActivity  {
         assignObjects();
         setListeners();
         prepareUI();
-       setOnGlobalLayoutListenerToContentView();
+        setOnGlobalLayoutListenerToContentView();
     }
 
     private void restartApp() {
@@ -142,7 +152,6 @@ public  abstract class BaseTemplateActivity extends AppCompatActivity  {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
-
 
 
     private void setOnGlobalLayoutListenerToContentView() {

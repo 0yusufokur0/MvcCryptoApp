@@ -18,7 +18,7 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class BaseApiActivity extends BaseUtilityActivity implements ApiListener{
+public abstract class BaseApiActivity extends BaseUtilityActivity implements ApiListener {
 
     //region class variables
     private ApiManager mApiManager;
@@ -30,7 +30,8 @@ public abstract class BaseApiActivity extends BaseUtilityActivity implements Api
 
     //region callback & abstract methods
     @Override
-    public void onApiResponseReceive(ApiMethod method, BaseResponse baseResponse, boolean isSuccess) {}
+    public void onApiResponseReceive(ApiMethod method, BaseResponse baseResponse, boolean isSuccess) {
+    }
     //endregion
 
     //region lifecycle methods
@@ -103,7 +104,7 @@ public abstract class BaseApiActivity extends BaseUtilityActivity implements Api
     //endregion
 
     //region inner classes & implementations
-    private ApiListener mApiListener = new ApiListener() {
+    private final ApiListener mApiListener = new ApiListener() {
         @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
         @Override
         public void onApiResponseReceive(ApiMethod method, BaseResponse baseResponse, boolean isSuccess) {
@@ -113,14 +114,14 @@ public abstract class BaseApiActivity extends BaseUtilityActivity implements Api
             if (mActiveApiMethods.contains(method)) {
                 mActiveApiMethods.remove(method);
                 if (!isDestroyed() && mActiveApiMethods.isEmpty()) {
-                   // hideProgressDialog();
+                    // hideProgressDialog();
                     System.out.println("Başarısız");
                 }
             }
             if (BaseApiActivity.this == getActiveActivity()) {
                 boolean isError = baseResponse.isError();
                 if (isError) {
-                   // handleErrorResponse(method, baseResponse);
+                    // handleErrorResponse(method, baseResponse);
                 } else {
                     //handleSuccessResponse(method, baseResponse);
                 }

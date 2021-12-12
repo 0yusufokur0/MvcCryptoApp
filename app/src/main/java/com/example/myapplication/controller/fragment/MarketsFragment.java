@@ -1,10 +1,7 @@
 package com.example.myapplication.controller.fragment;
 
-import android.os.Handler;
-import android.os.Message;
 import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,8 +17,6 @@ import com.example.myapplication.view.adapter.CryptoInfoAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.security.auth.callback.Callback;
 
 import butterknife.BindView;
 
@@ -44,9 +39,9 @@ public class MarketsFragment extends BaseFragment implements View.OnClickListene
     @Override
     public void assignObjects() {
         super.assignObjects();
-        mStockList=new ArrayList<>();
-        mAdapter=new CryptoInfoAdapter(context,mStockList);
-        mFilterType=FilterType.ALL;
+        mStockList = new ArrayList<>();
+        mAdapter = new CryptoInfoAdapter(context, mStockList);
+        mFilterType = FilterType.ALL;
     }
 
     @Override
@@ -54,8 +49,8 @@ public class MarketsFragment extends BaseFragment implements View.OnClickListene
         super.onEventReceive(event, datas);
 
 
-           // sendStocksRequestByFilterType();
-        }
+        // sendStocksRequestByFilterType();
+    }
 
     @Override
     public void onClick(View v) {
@@ -89,10 +84,11 @@ public class MarketsFragment extends BaseFragment implements View.OnClickListene
     }
 
     private void sendGetStocksRequest() {
-        GetCryptoStockRequest  request = new GetCryptoStockRequest();
+        GetCryptoStockRequest request = new GetCryptoStockRequest();
         request.setKey("");
-        sendRequest(request,true);
+        sendRequest(request, true);
     }
+
     private void handleGetStocksResponse(GetCryptoStockResponse response) {
         List<CryptoStock> stocks = response.getStocks();
         if (stocks != null) {
@@ -113,7 +109,6 @@ public class MarketsFragment extends BaseFragment implements View.OnClickListene
         }
     };
 */
-
 
 
 }

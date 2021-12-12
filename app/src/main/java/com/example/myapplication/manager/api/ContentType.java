@@ -6,14 +6,10 @@ public enum ContentType {
     APPLICATION_X_WWW_FORM_URL_ENCODED("application/x-www-form-urlencoded"),
     MULTIPART_FORM_DATA("multipart/form-data");
 
-    private String mTypeName;
+    private final String mTypeName;
 
     ContentType(String typeName) {
         mTypeName = typeName;
-    }
-
-    public String getTypeName() {
-        return mTypeName;
     }
 
     public static ContentType valueof(String typeName) {
@@ -23,5 +19,9 @@ public enum ContentType {
             }
         }
         return null;
+    }
+
+    public String getTypeName() {
+        return mTypeName;
     }
 }

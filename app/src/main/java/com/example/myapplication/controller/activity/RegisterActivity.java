@@ -14,8 +14,8 @@ import butterknife.BindView;
 
 public class RegisterActivity extends BaseActivity implements View.OnClickListener {
 
-    @BindView(R.id.registerBtn) Button registerBtn;
-
+    @BindView(R.id.registerBtn)
+    Button registerBtn;
 
 
     public static void start(Activity activity) {
@@ -41,7 +41,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        if(v==registerBtn){
+        if (v == registerBtn) {
             WelcomeActivity.start(activity);
         }
     }

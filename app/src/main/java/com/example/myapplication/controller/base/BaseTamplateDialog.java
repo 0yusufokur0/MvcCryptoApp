@@ -25,34 +25,45 @@ public abstract class BaseTamplateDialog extends DialogFragment {
 
     public abstract int getLayoutId();
 
-    public void createViews() {}
+    public void createViews() {
+    }
 
-    public void assignObjects() {}
+    public void assignObjects() {
+    }
 
-    public void setListeners() {}
+    public void setListeners() {
+    }
 
-    public void prepareUI() {}
-
-    @CallSuper
-    public void onLayoutReady() {}
-
-    @CallSuper
-    public void onCreated() {}
+    public void prepareUI() {
+    }
 
     @CallSuper
-    public void onStarted() {}
+    public void onLayoutReady() {
+    }
 
     @CallSuper
-    public void onResumed() {}
+    public void onCreated() {
+    }
 
     @CallSuper
-    public void onPaused() {}
+    public void onStarted() {
+    }
 
     @CallSuper
-    public void onStopped() {}
+    public void onResumed() {
+    }
 
     @CallSuper
-    public void onDestroyed() {}
+    public void onPaused() {
+    }
+
+    @CallSuper
+    public void onStopped() {
+    }
+
+    @CallSuper
+    public void onDestroyed() {
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

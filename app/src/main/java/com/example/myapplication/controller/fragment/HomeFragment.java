@@ -1,6 +1,5 @@
 package com.example.myapplication.controller.fragment;
 
-import android.app.Activity;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -10,7 +9,7 @@ import com.example.myapplication.controller.dialog.GetInformatiomDialog;
 
 import butterknife.BindView;
 
-public class HomeFragment  extends BaseFragment implements View.OnClickListener {
+public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     public static final int EVENT_TRANSACTION_BUTTON_CLICKED = getNewEventId();
 
@@ -47,7 +46,7 @@ public class HomeFragment  extends BaseFragment implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        if(v==llGetInformation){
+        if (v == llGetInformation) {
             GetInformatiomDialog.showDialog(activity);
 
         }

@@ -18,12 +18,15 @@ public abstract class BaseUtilityFragment extends BaseTamplateFragment implement
         return BaseActivity.getNewRequestCode();
     }
 
-    public void onHideKeyboard() {}
+    public void onHideKeyboard() {
+    }
 
-    public void onShowKeyboard(int keyboardHeight) {}
+    public void onShowKeyboard(int keyboardHeight) {
+    }
 
     @Override
-    public void onEventReceive(int event, Object... data) {}
+    public void onEventReceive(int event, Object... data) {
+    }
 
     @Override
     public void onCreated() {

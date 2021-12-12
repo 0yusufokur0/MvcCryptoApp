@@ -16,14 +16,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ParameterRequest<T> extends com.android.volley.toolbox.StringRequest {
-    private Gson mGson;
-    private ApiMethod mApiMethod;
-    private Class<T> mResponseClass;
-    private Map<String, String> mHeaders;
-    private Map<String, String> mParams;
-    private Response.Listener mSuccessListener;
-    private Response.ErrorListener mErrorListener;
-    private ResponseFormat mResponseFormat;
+    private final Gson mGson;
+    private final ApiMethod mApiMethod;
+    private final Class<T> mResponseClass;
+    private final Map<String, String> mHeaders;
+    private final Map<String, String> mParams;
+    private final Response.Listener mSuccessListener;
+    private final Response.ErrorListener mErrorListener;
+    private final ResponseFormat mResponseFormat;
 
     public ParameterRequest(ApiMethod apiMethod, BaseRequest request, Map<String, String> headers, Response.Listener successListener, Response.ErrorListener errorListener) {
         super(apiMethod.getMethodType(), apiMethod.getUrl(), successListener, errorListener);

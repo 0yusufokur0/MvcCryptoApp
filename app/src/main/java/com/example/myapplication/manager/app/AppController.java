@@ -1,4 +1,4 @@
-package com.example.myapplication.manager.apı;
+package com.example.myapplication.manager.app;
 
 import android.app.Application;
 import android.text.TextUtils;

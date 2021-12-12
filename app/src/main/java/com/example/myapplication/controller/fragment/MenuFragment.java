@@ -39,9 +39,7 @@ public class MenuFragment extends BaseFragment implements View.OnClickListener {
     TextView tvUserMany;
 
 
-
     private MenuTab mCurrentlySelectedMenuTab = MenuTab.HOME;
-
 
 
     @Override
@@ -71,14 +69,14 @@ public class MenuFragment extends BaseFragment implements View.OnClickListener {
     public void onClick(View v) {
 
         sendEvent(EVENT_MENU_ITEM_CLICK);
-        if(v==flHome){
-            sendEvent(EVENT_MAIN_ITEM_CLICK,MenuTab.HOME);
-        }else if(v==flNews){
-            sendEvent(EVENT_MAIN_ITEM_CLICK,MenuTab.NEWS);
-        }else if(v==flMarkets){
-            sendEvent(EVENT_MAIN_ITEM_CLICK,MenuTab.MARKETS);
-        }else if(v==flWallet||v==llProfile){
-            sendEvent(EVENT_MAIN_ITEM_CLICK,MenuTab.WALLET);
+        if (v == flHome) {
+            sendEvent(EVENT_MAIN_ITEM_CLICK, MenuTab.HOME);
+        } else if (v == flNews) {
+            sendEvent(EVENT_MAIN_ITEM_CLICK, MenuTab.NEWS);
+        } else if (v == flMarkets) {
+            sendEvent(EVENT_MAIN_ITEM_CLICK, MenuTab.MARKETS);
+        } else if (v == flWallet || v == llProfile) {
+            sendEvent(EVENT_MAIN_ITEM_CLICK, MenuTab.WALLET);
         }
     }
 
@@ -87,7 +85,7 @@ public class MenuFragment extends BaseFragment implements View.OnClickListener {
         if (event == EVENT_MAIN_ITEM_CLICK || event == BottomTabView.EVENT_TAB_SELECTED) {
             MenuTab selectedMenuTab = (MenuTab) data[0];
             updateSelectedMenuBackground(selectedMenuTab);
-        }else if (event == HomeFragment.EVENT_TRANSACTION_BUTTON_CLICKED) {
+        } else if (event == HomeFragment.EVENT_TRANSACTION_BUTTON_CLICKED) {
             updateSelectedMenuBackground(MenuTab.HOME);
         }
     }
@@ -106,7 +104,7 @@ public class MenuFragment extends BaseFragment implements View.OnClickListener {
             flWallet.setBackgroundColor(ContextCompat.getColor(context, R.color.bottom_tab_view_selected));
         } else if (selectedMenuTab == MenuTab.NEWS) {
             flNews.setBackgroundColor(ContextCompat.getColor(context, R.color.bottom_tab_view_selected));
-        }else if (selectedMenuTab == MenuTab.SORTING) {
+        } else if (selectedMenuTab == MenuTab.SORTING) {
             flSorting.setBackgroundColor(ContextCompat.getColor(context, R.color.bottom_tab_view_selected));
         }
         mCurrentlySelectedMenuTab = selectedMenuTab;

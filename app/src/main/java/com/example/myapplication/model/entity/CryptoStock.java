@@ -6,7 +6,7 @@ public class CryptoStock extends ApiEntity {
 
     private String currency;
     private String price;
-    private  String market_cap;
+    private String market_cap;
 
     public String getMarket_cap() {
         return market_cap;

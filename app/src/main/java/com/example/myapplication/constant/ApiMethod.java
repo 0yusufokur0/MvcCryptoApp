@@ -7,59 +7,19 @@ import com.example.myapplication.manager.api.ResponseFormat;
 import com.example.myapplication.model.request.GetCryptoStockRequest;
 import com.example.myapplication.model.response.GetCryptoStockResponse;
 
-public enum     ApiMethod {
+public enum ApiMethod {
 
 
+    GET_CRYPTO_STOCK("", GetCryptoStockRequest.class, GetCryptoStockResponse.class, Request.Method.GET, RequestType.QUERY);
 
-    GET_CRYPTO_STOCK("", GetCryptoStockRequest.class, GetCryptoStockResponse.class, Request.Method.GET, RequestType.QUERY) ;
-
-    private String mMethodName;
-    private Class<?> mRequestClass;
+    private final String mMethodName;
+    private final Class<?> mRequestClass;
     private RequestType mRequestType = ProjectSettings.API_DEFAULT_REQUEST_TYPE;
     private boolean mIsShowErrorResponseMessage = ProjectSettings.API_DEFAULT_SHOW_ERROR_RESPONSE_MESSAGE;
     private int mMethodType = ProjectSettings.API_DEFAULT_METHOD_TYPE;
-    private Class<?> mResponseClass;
-    private ResponseFormat mResponseFormat = ProjectSettings.API_DEFAULT_RESPONSE_FORMAT;
+    private final Class<?> mResponseClass;
+    private final ResponseFormat mResponseFormat = ProjectSettings.API_DEFAULT_RESPONSE_FORMAT;
     private ContentType mContentType = ProjectSettings.API_DEFAULT_CONTENT_TYPE;
-
-    public Class<?> getRequestClass() {
-        return mRequestClass;
-    }
-
-    public RequestType getRequestType() {
-        return mRequestType;
-    }
-
-    public boolean isShowErrorResponseMessage() {
-        return mIsShowErrorResponseMessage;
-    }
-
-    public int getMethodType() {
-        return mMethodType;
-    }
-
-    public Class<?> getResponseClass() {
-        return mResponseClass;
-    }
-
-    public String getUrl() {
-        if (mMethodName.startsWith("http")) {
-            return mMethodName;
-        }
-        String baseUrl = ProjectSettings.getApiBaseUrl();
-        if (!baseUrl.endsWith("/")) {
-            baseUrl = baseUrl + "/";
-        }
-        return baseUrl + mMethodName;
-    }
-
-    public ResponseFormat getResponseFormat() {
-        return mResponseFormat;
-    }
-
-    public ContentType getContentType() {
-        return mContentType;
-    }
 
     ApiMethod(String methodName, Class<?> requestClass, Class<?> responseClass) {
         mMethodName = methodName;
@@ -114,5 +74,44 @@ public enum     ApiMethod {
         mResponseClass = responseClass;
         mIsShowErrorResponseMessage = isShowErrorResponseMessage;
 
+    }
+
+    public Class<?> getRequestClass() {
+        return mRequestClass;
+    }
+
+    public RequestType getRequestType() {
+        return mRequestType;
+    }
+
+    public boolean isShowErrorResponseMessage() {
+        return mIsShowErrorResponseMessage;
+    }
+
+    public int getMethodType() {
+        return mMethodType;
+    }
+
+    public Class<?> getResponseClass() {
+        return mResponseClass;
+    }
+
+    public String getUrl() {
+        if (mMethodName.startsWith("http")) {
+            return mMethodName;
+        }
+        String baseUrl = ProjectSettings.getApiBaseUrl();
+        if (!baseUrl.endsWith("/")) {
+            baseUrl = baseUrl + "/";
+        }
+        return baseUrl + mMethodName;
+    }
+
+    public ResponseFormat getResponseFormat() {
+        return mResponseFormat;
+    }
+
+    public ContentType getContentType() {
+        return mContentType;
     }
 }

@@ -11,13 +11,13 @@ import java.util.Iterator;
 import java.util.List;
 
 public abstract class BaseManagerActivity extends BaseApiActivity {
-    private List<BaseManager> mManagers=new ArrayList<>();
+    private final List<BaseManager> mManagers = new ArrayList<>();
 
-    public void registerManager(BaseManager baseManager){
+    public void registerManager(BaseManager baseManager) {
         mManagers.add(baseManager);
     }
 
-    public void unregisterManager(BaseManager baseManager){
+    public void unregisterManager(BaseManager baseManager) {
         mManagers.remove(baseManager);
     }
 
@@ -78,7 +78,7 @@ public abstract class BaseManagerActivity extends BaseApiActivity {
             manager.onDestroyed();
             manager.destroy();
             iterator.remove();
-           // removeApiListener(manager);
+            // removeApiListener(manager);
         }
     }
 

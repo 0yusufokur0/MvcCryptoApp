@@ -11,6 +11,7 @@ import com.example.myapplication.constant.ProjectSettings;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateEncodingException;
@@ -25,6 +26,18 @@ import javax.crypto.spec.SecretKeySpec;
 public class SecurityHelper {
     //region statics
     private static SecurityHelper sInstance;
+    //region class variables
+    private final Context mContext;
+    private final String mCryptoTransformationType = ProjectSettings.CRYPTO_TRANSFORMATION_TYPE;
+    //endregion
+    private final String mCryptoAlgorithm = ProjectSettings.CRYPTO_ALGORITHM;
+    private final String mCertificateAlgorithm = ProjectSettings.CRYPTO_CERTIFICATE_ALGORITHM;
+    private final String mCertificateFactoryType = ProjectSettings.CRYPTO_CERTIFICATE_FACTORY_TYPE;
+    private final byte[] mKey;
+    private SecurityHelper(Context context) {
+        mContext = context;
+        mKey = getCertificateSha1Fingerprint().replace(":", "").substring(0, 16).getBytes();
+    }
 
     public static SecurityHelper getInstance(Context context) {
         if (sInstance == null) {
@@ -32,6 +45,7 @@ public class SecurityHelper {
         }
         return sInstance;
     }
+    //endregion
 
     public static String toSHA256(String text) {
         MessageDigest md;
@@ -44,28 +58,10 @@ public class SecurityHelper {
                 base64 = base64.substring(0, base64.length() - 1);
             }
             return base64;
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         return null;
-    }
-    //endregion
-
-    //region class variables
-    private Context mContext;
-    private String mCryptoTransformationType = ProjectSettings.CRYPTO_TRANSFORMATION_TYPE;
-    private String mCryptoAlgorithm = ProjectSettings.CRYPTO_ALGORITHM;
-    private String mCertificateAlgorithm = ProjectSettings.CRYPTO_CERTIFICATE_ALGORITHM;
-    private String mCertificateFactoryType = ProjectSettings.CRYPTO_CERTIFICATE_FACTORY_TYPE;
-
-    private byte[] mKey;
-    //endregion
-
-    private SecurityHelper(Context context) {
-        mContext = context;
-        mKey = getCertificateSha1Fingerprint().replace(":", "").substring(0, 16).getBytes();
     }
 
     //region methods

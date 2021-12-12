@@ -1,6 +1,6 @@
 package com.example.myapplication.manager.api;
 
-public class MultipartRequest{
+public class MultipartRequest {
 /*
     private Gson mGson;
     private ApiMethod mApiMethod;

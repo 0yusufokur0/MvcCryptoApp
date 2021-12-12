@@ -1,6 +1,6 @@
 package com.example.myapplication.constant;
 
-public enum  MenuTab {
+public enum MenuTab {
     HOME,
     NEWS,
     MARKETS,

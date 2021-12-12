@@ -1,7 +1,6 @@
 package com.example.myapplication.model.response;
 
 import com.example.myapplication.manager.api.ApiResponse;
-import com.example.myapplication.utility.L;
 
 public class BaseResponse extends ApiResponse {
     // FIXME message ve success field'lari projeye gore degisebilir

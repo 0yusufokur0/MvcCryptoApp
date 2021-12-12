@@ -24,12 +24,51 @@ import java.util.concurrent.atomic.AtomicInteger;
 public abstract class BaseUtilityActivity extends BaseTemplateActivity implements EventListener {
 
     //region statics
-    private static AtomicInteger sEventIdGeneratorIndex = new AtomicInteger(1);
-    private static AtomicInteger sRequestCodeGeneratorIndex = new AtomicInteger(1);
-    private static AtomicInteger sExtraIdGeneratorIndex = new AtomicInteger(1);
+    private static final AtomicInteger sEventIdGeneratorIndex = new AtomicInteger(1);
+    private static final AtomicInteger sRequestCodeGeneratorIndex = new AtomicInteger(1);
+    private static final AtomicInteger sExtraIdGeneratorIndex = new AtomicInteger(1);
     private static BaseTemplateActivity sActiveActivity;
     private static List<EventListener> sEventListeners;
     private static boolean sIsInForeground;
+    //region class variables
+    private List<BaseUtilityFragment> mActiveFragments;
+    private ProgressDialog mProgressDialog;
+    private boolean mIsRunning;
+    private boolean mIsStartingAnotherActivity;
+    private boolean mIsKeyboardVisible;
+    //endregion
+    //region inner classes & implementations
+    private final ViewTreeObserver.OnGlobalLayoutListener mKeyboardLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
+        @Override
+        public void onGlobalLayout() {
+            int navigationBarHeight = 0;
+            int resourceId = getResources().getIdentifier("navigation_bar_height", "dimen", "android");
+            if (resourceId > 0) {
+                navigationBarHeight = getResources().getDimensionPixelSize(resourceId);
+            }
+            int statusBarHeight = 0;
+            resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+            if (resourceId > 0) {
+                statusBarHeight = getResources().getDimensionPixelSize(resourceId);
+            }
+            Rect rect = new Rect();
+            getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);
+            int keyboardHeight = vgContent.getRootView().getHeight() - (statusBarHeight + navigationBarHeight + rect.height());
+            if (keyboardHeight <= 0 && mIsKeyboardVisible) {
+                mIsKeyboardVisible = false;
+                onHideKeyboard();
+                for (BaseUtilityFragment fragment : mActiveFragments) {
+                    fragment.onHideKeyboard();
+                }
+            } else if (keyboardHeight > 0 && !mIsKeyboardVisible) {
+                mIsKeyboardVisible = true;
+                onShowKeyboard(keyboardHeight);
+                for (BaseUtilityFragment fragment : mActiveFragments) {
+                    fragment.onShowKeyboard(keyboardHeight);
+                }
+            }
+        }
+    };
 
     public static boolean isInForeground() {
         return sIsInForeground;
@@ -46,28 +85,23 @@ public abstract class BaseUtilityActivity extends BaseTemplateActivity implement
     public static int getNewRequestCode() {
         return sRequestCodeGeneratorIndex.getAndIncrement();
     }
+    //endregion
 
     public static String getNewExtraId() {
         return "extra_" + sExtraIdGeneratorIndex.getAndIncrement();
     }
-    //endregion
-
-    //region class variables
-    private List<BaseUtilityFragment> mActiveFragments;
-    private ProgressDialog mProgressDialog;
-    private boolean mIsRunning;
-    private boolean mIsStartingAnotherActivity;
-    private boolean mIsKeyboardVisible;
-    //endregion
 
     //region callback & abstract methods
-    public void onHideKeyboard() {}
+    public void onHideKeyboard() {
+    }
 
-    public void onShowKeyboard(int keyboardHeight) {}
+    public void onShowKeyboard(int keyboardHeight) {
+    }
+    //endregion
 
     @Override
-    public void onEventReceive(int event, Object... datas) {}
-    //endregion
+    public void onEventReceive(int event, Object... datas) {
+    }
 
     //region lifecyclemethods
     @Override
@@ -142,13 +176,13 @@ public abstract class BaseUtilityActivity extends BaseTemplateActivity implement
         mIsStartingAnotherActivity = true;
         super.startActivity(intent, options);
     }
+    //endregion
 
     @Override
     public void startActivityForResult(Intent intent, int requestCode) {
         mIsStartingAnotherActivity = true;
         super.startActivityForResult(intent, requestCode);
     }
-    //endregion
 
     //region public methods
     public App getApp() {
@@ -159,20 +193,20 @@ public abstract class BaseUtilityActivity extends BaseTemplateActivity implement
         return getSupportFragmentManager().findFragmentById(id);
     }
 
-    public void setRunning(boolean val) {
-        mIsRunning = val;
-    }
-
     public boolean isRunning() {
         return mIsRunning;
     }
 
-    public void setStartingAnotherActivity(boolean startingAnotherActivity) {
-        mIsStartingAnotherActivity = startingAnotherActivity;
+    public void setRunning(boolean val) {
+        mIsRunning = val;
     }
 
     public boolean isStartingAnotherActivity() {
         return mIsStartingAnotherActivity;
+    }
+
+    public void setStartingAnotherActivity(boolean startingAnotherActivity) {
+        mIsStartingAnotherActivity = startingAnotherActivity;
     }
 
     /*
@@ -208,7 +242,7 @@ public abstract class BaseUtilityActivity extends BaseTemplateActivity implement
             @Override
             public void run() {
                 if (isRunning()) {
-                   // mProgressDialog = ProgressDialog.show(activity, text);
+                    // mProgressDialog = ProgressDialog.show(activity, text);
                 }
             }
         });
@@ -225,6 +259,7 @@ public abstract class BaseUtilityActivity extends BaseTemplateActivity implement
             }
         });
     }
+    // endregion
 
     public void setWindowBackgroundImage(int imgResId) {
         ImageView imageView = new ImageView(this);
@@ -233,50 +268,16 @@ public abstract class BaseUtilityActivity extends BaseTemplateActivity implement
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         ((ViewGroup) getWindow().getDecorView()).addView(imageView, 0);
     }
-    // endregion
 
     //region private methods
     private void setKeyboardListener() {
         vgContent.getViewTreeObserver().addOnGlobalLayoutListener(mKeyboardLayoutListener);
     }
+    //endregion
 
     private void removeKeyboardListener() {
         vgContent.getViewTreeObserver().removeOnGlobalLayoutListener(mKeyboardLayoutListener);
     }
-    //endregion
-
-    //region inner classes & implementations
-    private ViewTreeObserver.OnGlobalLayoutListener mKeyboardLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
-        @Override
-        public void onGlobalLayout() {
-            int navigationBarHeight = 0;
-            int resourceId = getResources().getIdentifier("navigation_bar_height", "dimen", "android");
-            if (resourceId > 0) {
-                navigationBarHeight = getResources().getDimensionPixelSize(resourceId);
-            }
-            int statusBarHeight = 0;
-            resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
-            if (resourceId > 0) {
-                statusBarHeight = getResources().getDimensionPixelSize(resourceId);
-            }
-            Rect rect = new Rect();
-            getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);
-            int keyboardHeight = vgContent.getRootView().getHeight() - (statusBarHeight + navigationBarHeight + rect.height());
-            if (keyboardHeight <= 0 && mIsKeyboardVisible) {
-                mIsKeyboardVisible = false;
-                onHideKeyboard();
-                for (BaseUtilityFragment fragment : mActiveFragments) {
-                    fragment.onHideKeyboard();
-                }
-            } else if (keyboardHeight > 0 && !mIsKeyboardVisible) {
-                mIsKeyboardVisible = true;
-                onShowKeyboard(keyboardHeight);
-                for (BaseUtilityFragment fragment : mActiveFragments) {
-                    fragment.onShowKeyboard(keyboardHeight);
-                }
-            }
-        }
-    };
 
 
 

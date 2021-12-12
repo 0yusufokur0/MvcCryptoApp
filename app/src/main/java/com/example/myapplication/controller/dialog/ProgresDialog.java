@@ -17,20 +17,18 @@ import butterknife.BindView;
 public class ProgresDialog extends BaseDialog {
 
     private static final String EXTRA_TEXT = "extra.text";
+    @BindView(R.id.textView)
+    TextView textView;
+    private String mText;
 
     public static ProgressDialog show(FragmentActivity activity, String text) {
         Bundle args = new Bundle();
         args.putString(EXTRA_TEXT, text);
         ProgressDialog dialog = new ProgressDialog(activity);
-       // dialog.setArguments(args);
-       // dialog.show(activity);
+        // dialog.setArguments(args);
+        // dialog.show(activity);
         return dialog;
     }
-
-    @BindView(R.id.textView)
-    TextView textView;
-
-    private String mText;
 
     @Override
     public int getLayoutId() {

@@ -18,12 +18,15 @@ public abstract class BaseUtilityDialog extends BaseTamplateDialog implements Ev
         return BaseActivity.getNewRequestCode();
     }
 
-    public void onHideKeyboard() {}
+    public void onHideKeyboard() {
+    }
 
-    public void onShowKeyboard(int keyboardHeight) {}
+    public void onShowKeyboard(int keyboardHeight) {
+    }
 
     @Override
-    public void onEventReceive(int event, Object... data) {}
+    public void onEventReceive(int event, Object... data) {
+    }
 
     @Override
     public void onCreated() {
@@ -80,11 +83,12 @@ public abstract class BaseUtilityDialog extends BaseTamplateDialog implements Ev
     public void hideProgressDialog() {
         ((BaseUtilityActivity) getActivity()).hideProgressDialog();
     }
-/*
-    public PreferenceHelper getPreference() {
-        return ((BaseUtilityActivity) activity).getPreference();
-    }
-*/
+
+    /*
+        public PreferenceHelper getPreference() {
+            return ((BaseUtilityActivity) activity).getPreference();
+        }
+    */
     public App getApp() {
         return ((BaseUtilityActivity) activity).getApp();
     }

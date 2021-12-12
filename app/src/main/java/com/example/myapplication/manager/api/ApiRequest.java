@@ -6,20 +6,20 @@ public abstract class ApiRequest {
     private transient Object mSender;
     private transient boolean mIsShowProgressAllowed;
 
-    public void setShowProgressAllowed(boolean showProgressAllowed) {
-        mIsShowProgressAllowed = showProgressAllowed;
-    }
-
     public boolean isShowProgressAllowed() {
         return mIsShowProgressAllowed;
     }
 
-    public void setSender(Object sender) {
-        mSender = sender;
+    public void setShowProgressAllowed(boolean showProgressAllowed) {
+        mIsShowProgressAllowed = showProgressAllowed;
     }
 
     public Object getSender() {
         return mSender;
+    }
+
+    public void setSender(Object sender) {
+        mSender = sender;
     }
 
     public ApiMethod getApiMethod() {

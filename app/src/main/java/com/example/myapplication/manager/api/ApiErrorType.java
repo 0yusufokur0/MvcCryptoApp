@@ -13,14 +13,19 @@ public enum ApiErrorType {
 
     NO_CONNECTİON("İnternet Bağlantınızı Kontrol Edin", NoConnectionError.class),
     NETWORK("İnternet Bağlantınızı Kontrol Edin", NetworkError.class),
-    AUTH_FAILURE("Yeniden Giriş Yapın", AuthFailureError .class),
-    TIMEOUT("İstek zaman aşımna uğradı", TimeoutError .class),
-    PARSE("yanlış veri formatı", ParseError .class),
-    SERVER("sunucu hatası", ServerError .class, ClientError .class),
+    AUTH_FAILURE("Yeniden Giriş Yapın", AuthFailureError.class),
+    TIMEOUT("İstek zaman aşımna uğradı", TimeoutError.class),
+    PARSE("yanlış veri formatı", ParseError.class),
+    SERVER("sunucu hatası", ServerError.class, ClientError.class),
     UNKNOWN("Beklenmedik bir hata oluştu");
 
-    private Class[] mVolleyErrorClasses;
-    private String mErrorMessageResId;
+    private final Class[] mVolleyErrorClasses;
+    private final String mErrorMessageResId;
+
+    ApiErrorType(String errorMessageResId, Class... volleyErrorClasses) {
+        mVolleyErrorClasses = volleyErrorClasses;
+        mErrorMessageResId = errorMessageResId;
+    }
 
     public static ApiErrorType valueof(VolleyError volleyError) {
         if (volleyError != null) {
@@ -34,17 +39,11 @@ public enum ApiErrorType {
         return UNKNOWN;
     }
 
-
-    ApiErrorType(String errorMessageResId, Class... volleyErrorClasses) {
-        mVolleyErrorClasses = volleyErrorClasses;
-        mErrorMessageResId = errorMessageResId;
-    }
-
     public Class[] getVolleyErrorClasses() {
         return mVolleyErrorClasses;
     }
 
     public int getErrorMessageResId() {
-        return Integer.parseInt( mErrorMessageResId);
+        return Integer.parseInt(mErrorMessageResId);
     }
 }

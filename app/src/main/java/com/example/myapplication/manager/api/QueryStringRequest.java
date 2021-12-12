@@ -1,7 +1,5 @@
 package com.example.myapplication.manager.api;
 
-import android.service.quickaccesswallet.GetWalletCardsResponse;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
@@ -23,7 +21,6 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.net.URLEncoder;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,14 +28,14 @@ import java.util.Map;
 public class QueryStringRequest<T> extends Request<T> {
     private final String TAG = ProjectSettings.LOG_TAG;
 
-    private Gson mGson;
-    private String mUrl;
-    private ApiMethod mApiMethod;
-    private Class<T> mResponseClass;
-    private Map<String, String> mHeaders;
-    private Map<String, String> mParams;
-    private Response.Listener mSuccessListener;
-    private ResponseFormat mResponseFormat;
+    private final Gson mGson;
+    private final String mUrl;
+    private final ApiMethod mApiMethod;
+    private final Class<T> mResponseClass;
+    private final Map<String, String> mHeaders;
+    private final Map<String, String> mParams;
+    private final Response.Listener mSuccessListener;
+    private final ResponseFormat mResponseFormat;
 
     public QueryStringRequest(ApiMethod apiMethod, BaseRequest request, Map<String, String> headers, Response.Listener successListener, Response.ErrorListener errorListener) {
         super(apiMethod.getMethodType(), apiMethod.getUrl(), errorListener);
@@ -86,13 +83,14 @@ public class QueryStringRequest<T> extends Request<T> {
             if (mResponseFormat == ResponseFormat.JSON) {
                 String responseString = new String(response.data, ProjectSettings.API_DEFAULT_CHARSET);
                 L.e("API response recapimaeived: " + mApiMethod + " " + responseString);
-                if (mResponseClass== GetCryptoStockResponse.class){
-                    Type type=new TypeToken<List<CryptoStock>>(){}.getType();
-                    List<CryptoStock> stocks=mGson.fromJson(responseString,type);
-                    GetCryptoStockResponse getCryptoStockResponse=new GetCryptoStockResponse();
+                if (mResponseClass == GetCryptoStockResponse.class) {
+                    Type type = new TypeToken<List<CryptoStock>>() {
+                    }.getType();
+                    List<CryptoStock> stocks = mGson.fromJson(responseString, type);
+                    GetCryptoStockResponse getCryptoStockResponse = new GetCryptoStockResponse();
                     getCryptoStockResponse.setStocks(stocks);
-                    result=(T)getCryptoStockResponse;
-                }else{
+                    result = (T) getCryptoStockResponse;
+                } else {
                     result = mGson.fromJson(responseString, mResponseClass);
                 }
 

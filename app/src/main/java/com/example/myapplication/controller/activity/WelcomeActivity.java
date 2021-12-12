@@ -1,7 +1,6 @@
 package com.example.myapplication.controller.activity;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +12,6 @@ import com.example.myapplication.controller.base.BaseActivity;
 import com.example.myapplication.model.response.BaseResponse;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 public class WelcomeActivity extends BaseActivity implements View.OnClickListener {
 
@@ -48,15 +46,14 @@ public class WelcomeActivity extends BaseActivity implements View.OnClickListene
     }
 
 
-
     @Override
     public void onClick(View v) {
-        if(v==btnWelcomeSiginIn){
+        if (v == btnWelcomeSiginIn) {
             LoginActivity.start(activity);
-        }else if(v==textRegister){
+        } else if (v == textRegister) {
             RegisterActivity.start(activity);
         }
-  }
+    }
 
     @Override
     public void onApiResponseReceive(ApiMethod method, BaseResponse response, boolean isSuccess) {

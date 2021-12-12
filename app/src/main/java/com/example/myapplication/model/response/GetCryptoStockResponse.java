@@ -15,4 +15,5 @@ public class GetCryptoStockResponse extends BaseResponse {
     public void setStocks(List<CryptoStock> stocks) {
         this.stocks = stocks;
     }
+
 }

@@ -13,7 +13,8 @@ import com.example.myapplication.model.response.BaseResponse;
 public abstract class BaseApiDialog extends BaseUtilityDialog implements ApiListener {
 
     @Override
-    public void onApiResponseReceive(ApiMethod method, BaseResponse response, boolean isSuccess) {}
+    public void onApiResponseReceive(ApiMethod method, BaseResponse response, boolean isSuccess) {
+    }
 
     @Override
     public void onCreated() {

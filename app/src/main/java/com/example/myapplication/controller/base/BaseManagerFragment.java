@@ -12,7 +12,7 @@ import java.util.List;
 
 public abstract class BaseManagerFragment extends BaseApiFragment {
 
-    private List<BaseManager> mManagers = new ArrayList<>();
+    private final List<BaseManager> mManagers = new ArrayList<>();
 
     public void registerManager(BaseManager manager) {
         mManagers.add(manager);
@@ -79,7 +79,7 @@ public abstract class BaseManagerFragment extends BaseApiFragment {
             manager.onDestroyed();
             manager.destroy();
             iterator.remove();
-           // removeApiListener(manager);
+            // removeApiListener(manager);
         }
     }
 

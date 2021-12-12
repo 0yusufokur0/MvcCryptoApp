@@ -11,7 +11,6 @@ import com.example.myapplication.model.response.BaseResponse;
 public class App extends Application implements ApiListener, EventListener {
 
 
-
     private static App mInstance;
     private ApiManager mApiManager;
 
@@ -22,8 +21,8 @@ public class App extends Application implements ApiListener, EventListener {
     @Override
     public void onCreate() {
         super.onCreate();
-        mInstance=this;
-        mApiManager=ApiManager.getInstance(this);
+        mInstance = this;
+        mApiManager = ApiManager.getInstance(this);
     }
 
     @Override

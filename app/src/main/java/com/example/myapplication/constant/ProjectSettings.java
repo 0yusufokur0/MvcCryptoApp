@@ -6,7 +6,7 @@ import com.example.myapplication.manager.api.ContentType;
 import com.example.myapplication.manager.api.RequestType;
 import com.example.myapplication.manager.api.ResponseFormat;
 
-public  abstract class ProjectSettings {
+public abstract class ProjectSettings {
 
     public static final boolean IS_DEBUG = false && BuildConfig.DEBUG;
     public static final String LOG_TAG = "Trader Games";
@@ -50,7 +50,6 @@ public  abstract class ProjectSettings {
     public static final boolean API_ENCRYPTION_ENABLED = true;
 
 
-
     public static final String API_BASE_URL_TEST;
     public static final String API_BASE_URL_PROD;
     public static final String CRYPTO_TRANSFORMATION_TYPE;
@@ -63,7 +62,7 @@ public  abstract class ProjectSettings {
         API_BASE_URL_PROD = "";
         CRYPTO_TRANSFORMATION_TYPE = "";
         CRYPTO_ALGORITHM = "";
-        CRYPTO_CERTIFICATE_FACTORY_TYPE ="";
+        CRYPTO_CERTIFICATE_FACTORY_TYPE = "";
         CRYPTO_CERTIFICATE_ALGORITHM = "";
     }
 

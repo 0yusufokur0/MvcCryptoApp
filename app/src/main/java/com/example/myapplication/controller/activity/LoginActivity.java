@@ -46,9 +46,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View view) {
-        if(view == siginInBtn){
+        if (view == siginInBtn) {
             MainActivity.startWithNewTask(activity);
-        }else if(view==registerBtn){
+        } else if (view == registerBtn) {
             RegisterActivity.start(activity);
         }
     }

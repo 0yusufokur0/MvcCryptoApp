@@ -13,7 +13,8 @@ import com.example.myapplication.model.response.BaseResponse;
 public abstract class BaseApiFragment extends BaseUtilityFragment implements ApiListener {
 
     @Override
-    public void onApiResponseReceive(ApiMethod method, BaseResponse response, boolean isSuccess) {}
+    public void onApiResponseReceive(ApiMethod method, BaseResponse response, boolean isSuccess) {
+    }
 
 
     @Override
@@ -56,8 +57,6 @@ public abstract class BaseApiFragment extends BaseUtilityFragment implements Api
     public void removeApiListener(ApiListener listener) {
         ((BaseApiActivity) activity).removeApiListener(listener);
     }
-
-
 
 
 }

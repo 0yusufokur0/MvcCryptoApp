@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -55,15 +54,32 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private boolean mIsFromNewsNotification;
     private boolean mIsComeForContactActivity;
+    private final DrawerLayout.DrawerListener mDrawerListener = new DrawerLayout.DrawerListener() {
+        @Override
+        public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
+            //KeyboardUtil.hide(context);
+            float slideX = drawerView.getWidth() * slideOffset;
+            llContent.setTranslationX(slideX);
+        }
 
+        @Override
+        public void onDrawerOpened(@NonNull View drawerView) {
+        }
+
+        @Override
+        public void onDrawerClosed(@NonNull View drawerView) {
+        }
+
+        @Override
+        public void onDrawerStateChanged(int newState) {
+        }
+    };
 
     public static void startWithNewTask(Activity activity) {
         Intent intent = new Intent(activity, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         activity.startActivity(intent);
     }
-
-
 
     @Override
     public int getLayoutId() {
@@ -76,11 +92,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mIsFromNewsNotification = getIntent().getBooleanExtra(EXTRA_IS_COMING_FROM_NEWS_NOTIFICATION, false);
         mIsComeForContactActivity = getIntent().getBooleanExtra(EXTRA_IS_COMING_FOR_CONTACT_ACTIVITY, false);
 
-        fragmentNews=new NewsFragment();
-        fragmentHome=new HomeFragment();
-        fragmentMarkets=new MarketsFragment();
-        fragmentSorting=new SortingFragment();
-        fragmentWallet=new WalletFragment();
+        fragmentNews = new NewsFragment();
+        fragmentHome = new HomeFragment();
+        fragmentMarkets = new MarketsFragment();
+        fragmentSorting = new SortingFragment();
+        fragmentWallet = new WalletFragment();
 
     }
 
@@ -88,11 +104,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void onLayoutReady() {
         super.onLayoutReady();
 
-            showFragmentBySelectedMenuTab(MenuTab.HOME);
-            mSelectedMenuTab = MenuTab.HOME;
+        showFragmentBySelectedMenuTab(MenuTab.HOME);
+        mSelectedMenuTab = MenuTab.HOME;
 
     }
-
 
     @Override
     public void setListeners() {
@@ -132,28 +147,28 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     public void onBackPressed() {
-        if(mSelectedMenuTab!=MenuTab.HOME){
+        if (mSelectedMenuTab != MenuTab.HOME) {
             showFragmentBySelectedMenuTab(MenuTab.HOME);
-        }else{
+        } else {
             super.onBackPressed();
         }
     }
 
-    private void showFragmentBySelectedMenuTab(MenuTab clickedTab){
-        if(clickedTab !=mSelectedMenuTab){
-            if(clickedTab==MenuTab.HOME){
+    private void showFragmentBySelectedMenuTab(MenuTab clickedTab) {
+        if (clickedTab != mSelectedMenuTab) {
+            if (clickedTab == MenuTab.HOME) {
                 tvTitle.setText("Ana Sayfa");
-                    replaceFragment(fragmentHome);
-            }else if(clickedTab==MenuTab.NEWS){
+                replaceFragment(fragmentHome);
+            } else if (clickedTab == MenuTab.NEWS) {
                 tvTitle.setText("Haberler");
                 replaceFragment(fragmentNews);
-            }else if(clickedTab==MenuTab.MARKETS){
+            } else if (clickedTab == MenuTab.MARKETS) {
                 tvTitle.setText("Piyasalar");
                 replaceFragment(fragmentMarkets);
-            }else if(clickedTab==MenuTab.WALLET){
+            } else if (clickedTab == MenuTab.WALLET) {
                 tvTitle.setText("Cüzdan");
                 replaceFragment(fragmentWallet);
-            }else if(clickedTab==MenuTab.SORTING){
+            } else if (clickedTab == MenuTab.SORTING) {
                 tvTitle.setText("Sıralama");
                 replaceFragment(fragmentSorting);
             }
@@ -168,26 +183,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         transaction.replace(R.id.flContainer, fragment);
         transaction.commit();
     }
-
-
-
-    private DrawerLayout.DrawerListener mDrawerListener = new DrawerLayout.DrawerListener() {
-        @Override
-        public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
-           //KeyboardUtil.hide(context);
-            float slideX = drawerView.getWidth() * slideOffset;
-            llContent.setTranslationX(slideX);
-        }
-
-        @Override
-        public void onDrawerOpened(@NonNull View drawerView) { }
-
-        @Override
-        public void onDrawerClosed(@NonNull View drawerView) { }
-
-        @Override
-        public void onDrawerStateChanged(int newState) { }
-    };
 
     @Override
     public void onApiResponseReceive(ApiMethod method, BaseResponse response, boolean isSuccess) {

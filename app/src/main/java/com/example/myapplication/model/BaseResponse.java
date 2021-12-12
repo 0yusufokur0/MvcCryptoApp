@@ -22,4 +22,5 @@ public class BaseResponse extends ApiResponse {
     public void setError(boolean isError) {
         success = !isError;
     }
+
 }
